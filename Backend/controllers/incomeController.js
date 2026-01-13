@@ -5,7 +5,7 @@ const { isValidObjectId } = require("mongoose");
 //Add Income Source
 exports.addIncome=async(req,res)=>{
     try{
-const userId=req.user._id;
+const userId=req.user.id;
     const{icon,source,amount,date}=req.body;
     //validation : check for missing fields
     console.log(icon,source,amount,date);
@@ -23,7 +23,7 @@ const newIncome = new Income({ userId, icon: icon || '', source, amount, date: n
 //get All Income Source
 exports.getAllIncome=async(req,res)=>{
     try{
-    const userId=req.user._id;
+    const userId=req.user.id;
         const income=await Income.find({userId}).sort({date:-1});
         res.json(income);
     }catch(error){
@@ -34,7 +34,7 @@ exports.getAllIncome=async(req,res)=>{
 //delete Income Source
 exports.deleteIncome = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const userId = req.user.id;
     const incomeId = req.params.id;
 
     if (!isValidObjectId(incomeId)) {
@@ -62,7 +62,7 @@ exports.deleteIncome = async (req, res) => {
 //download Income Excel
 exports.downloadIncomeExcel = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const userId = req.user.id;
 
     const income = await Income.find({ userId }).sort({ date: -1 });
 

@@ -6,7 +6,7 @@ const { isValidObjectId } = require("mongoose");
 //Add Expense Source
 exports.addExpense=async(req,res)=>{
     try{
-const userId=req.user._id;
+const userId=req.user.id;
     const{icon,category,amount,date}=req.body;
     //validation : check for missing fields
     if(!category || !amount || !date){
@@ -23,7 +23,7 @@ const userId=req.user._id;
 //get All Expense Source
 exports.getAllExpense=async(req,res)=>{
        try{
-    const userId=req.user._id;
+    const userId=req.user.id;
           const expenses=await Expense.find({userId}).sort({date:-1});
           res.json(expenses);
       }catch(error){
@@ -34,7 +34,7 @@ exports.getAllExpense=async(req,res)=>{
 //delete Expense Source
 exports.deleteExpense=async(req,res)=>{
        try{
-      const userId=req.user._id;
+      const userId=req.user.id;
       const expenseId = req.params.id;
 
     if (!isValidObjectId(expenseId)) {
@@ -55,7 +55,7 @@ exports.deleteExpense=async(req,res)=>{
 //download Expense Excel
 exports.downloadExpenseExcel=async(req,res)=>{
      try{
-         const userId=req.user._id;
+         const userId=req.user.id;
                 const expenses=await Expense.find({userId}).sort({date:-1});
                 //prepare data for excel
                 const data=expenses.map((item)=>({
