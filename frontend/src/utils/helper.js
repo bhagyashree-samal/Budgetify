@@ -38,12 +38,20 @@ export const prepareExpenseBarChartData=(data=[])=>{
 
 import moment from 'moment';
 
+
 export const prepareIncomeBarChartData = (data = []) => {
+  return data.map(item => ({
+    category: moment(item.date).format("DD MMM"),
+    amount: Number(item.amount)
+  }));
+};
+
+export const prepareExpenseLineChartData = (data = []) => {
   const sortedData = [...data].sort((a, b) => new Date(a.date) - new Date(b.date));
   const chartData = sortedData.map((item) => ({
     month: moment(item?.date).format('DD MMM'),
     amount: item?.amount,
-    source: item?.source,
+    category: item?.category,
   }));
   return chartData;
 };

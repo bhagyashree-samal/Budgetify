@@ -11,6 +11,7 @@ import Income from "./pages/Dashboard/Income";
 import Login from "./pages/Auth/Login";
 import Signup from "./pages/Auth/Signup";
 import UserProvider from "./context/userContext";
+import {Toaster} from 'react-hot-toast';
 const App = () => {
   return (
     <UserProvider>
@@ -26,6 +27,14 @@ const App = () => {
         </Routes>
       </Router>
     </div>
+
+    <Toaster toast={{
+      className:"",
+      style:{
+        fontSize:'13px'
+      },
+    }}/>
+
     </UserProvider>
   );
 };
